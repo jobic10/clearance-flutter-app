@@ -18,8 +18,8 @@ class _HomePageState extends State<HomePage> {
   Widget accountPicture = CircleAvatar(
     child: Text("O"),
   );
-
-  void _getPreferences() async {
+  bool isClicked = false;
+  Future<void> _getPreferences() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString(constant.token);
     try {
@@ -79,6 +79,27 @@ class _HomePageState extends State<HomePage> {
                 subtitle: Text("Clearance Status"),
               ),
             ),
+            Card(
+                child: IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () async {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+                if (isClicked) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Refreshing data from server"),
+                    duration: Duration(seconds: 30),
+                  ),
+                );
+                isClicked = true;
+
+                await _getPreferences();
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Data has been refreshed")));
+                isClicked = false;
+              },
+            )),
           ];
           email = res['regno'];
           name = res['fullname'];
