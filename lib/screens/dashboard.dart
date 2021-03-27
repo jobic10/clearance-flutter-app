@@ -95,6 +95,8 @@ class _HomePageState extends State<HomePage> {
                 isClicked = true;
 
                 await _getPreferences();
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Data has been refreshed")));
                 isClicked = false;
@@ -174,6 +176,9 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               leading: Icon(Icons.ballot_rounded),
               title: Text('View Upload Status'),
+              onTap: () {
+                Navigator.pushNamed(context, '/view');
+              },
             ),
             ListTile(
               leading: Icon(Icons.logout),

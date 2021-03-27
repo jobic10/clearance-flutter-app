@@ -1,5 +1,6 @@
 import 'package:clearance/screens/dashboard.dart';
 import 'package:clearance/screens/upload.dart';
+import 'package:clearance/screens/view_uploads.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'constants.dart';
@@ -43,7 +44,7 @@ class MainAppState extends State<MainApp> {
         '/login': (context) => Login(),
         '/upload': (context) => Upload(),
         '/home': (context) => HomePage(),
-        '/view': (context) => null,
+        '/view': (context) => ViewUpload(),
       },
     );
   }
